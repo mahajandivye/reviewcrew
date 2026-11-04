@@ -1,0 +1,36 @@
+"$schema" = "https://openapi.vercel.sh/vercel.json"
+
+# Vercel serves the Vite interface and FastAPI backend under one project URL.
+[services.frontend]
+root = "frontend/"
+framework = "vite"
+rewrites = [{ "source" = "/(.*)", "destination" = "/index.html" }]
+
+[services.backend]
+root = "backend/"
+framework = "fastapi"
+entrypoint = "app.main:app"
+
+[[rewrites]]
+source = "/api/(.*)"
+destination = { service = "backend" }
+
+[[rewrites]]
+source = "/health"
+destination = { service = "backend" }
+
+[[rewrites]]
+source = "/webhook/(.*)"
+destination = { service = "backend" }
+
+[[rewrites]]
+source = "/docs"
+destination = { service = "backend" }
+
+[[rewrites]]
+source = "/openapi.json"
+destination = { service = "backend" }
+
+[[rewrites]]
+source = "/(.*)"
+destination = { service = "frontend" }

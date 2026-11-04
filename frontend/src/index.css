@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   ChatGPT-style palette: neutral greys, white main canvas, slightly darker
+   sidebar, one near-black accent for primary actions. No brand hues, so the
+   only colour on screen is severity (red / amber / green).
+--------------------------------------------------------------------------- */
+:root {
+  --bg: #ffffff;
+  --surface: #f9f9f9;
+  --panel: #ffffff;
+  --bubble: #f4f4f4;
+  --soft: #ececec;
+  --ink: #0d0d0d;
+  --muted: #6b6b6b;
+  --placeholder: #9a9a9a;
+  --line: #e5e5e5;
+  --accent: #0d0d0d;
+  --accent-hover: #2f2f2f;
+  --on-accent: #ffffff;
+  --danger: #c33a2c;
+  --warn: #9a6a14;
+  --ok: #1f7a4d;
+  --code: #0d0d0d;
+  --code-head: #2f2f2f;
+  --code-ink: #ececec;
+}
+
+.dark {
+  --bg: #212121;
+  --surface: #171717;
+  --panel: #212121;
+  --bubble: #303030;
+  --soft: #2f2f2f;
+  --ink: #ececec;
+  --muted: #a8a8a8;
+  --placeholder: #8f8f8f;
+  --line: #3c3c3c;
+  --accent: #ffffff;
+  --accent-hover: #d9d9d9;
+  --on-accent: #0d0d0d;
+  --danger: #f08a7c;
+  --warn: #e0b26a;
+  --ok: #7bd3a4;
+  --code: #0d0d0d;
+  --code-head: #2f2f2f;
+  --code-ink: #ececec;
+}
+
+@theme inline {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-panel: var(--panel);
+  --color-bubble: var(--bubble);
+  --color-soft: var(--soft);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-placeholder: var(--placeholder);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accenth: var(--accent-hover);
+  --color-onaccent: var(--on-accent);
+  --color-danger: var(--danger);
+  --color-warn: var(--warn);
+  --color-ok: var(--ok);
+  --color-code: var(--code);
+  --color-codehead: var(--code-head);
+  --color-codeink: var(--code-ink);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-bg text-ink antialiased;
+  font-size: 16px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--ink) 18%, transparent);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--muted) 30%, transparent) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--muted) 30%, transparent);
+  border-radius: 9999px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* Keep the composer shell as the focus cue; avoid a second box around its text field. */
+form input:focus-visible,
+form textarea:focus-visible {
+  outline: none;
+}
+
+textarea {
+  field-sizing: content;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.18s ease-out both;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+
+.caret::after {
+  content: "▍";
+  margin-left: 2px;
+  animation: blink 1s steps(1) infinite;
+}
+
+/* ChatGPT renders code blocks dark even on the light canvas. */
+.codeblock {
+  background: var(--code);
+  color: var(--code-ink);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.codeblock-head {
+  background: var(--code-head);
+  color: #cfcfcf;
+}

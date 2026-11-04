@@ -1,0 +1,17 @@
+# Never upload local secrets or environments
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+frontend/.env
+frontend/.env.*
+
+# Local-only dependencies and generated files
+.venv/
+backend/.venv/
+frontend/node_modules/
+backend/__pycache__/
+backend/.pytest_cache/
+frontend/dist/
+.tmp/

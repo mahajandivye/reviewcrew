@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 470" role="img" aria-labelledby="title desc">
+  <title id="title">ReviewCrew system map</title>
+  <desc id="desc">A browser sends code to the Vercel-hosted React interface and FastAPI service. The service combines local analysis with OpenRouter, saves review data in Neon Postgres, and returns findings to the browser. GitHub pull requests can enter through a webhook.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#44536a"/></marker>
+    <marker id="dashArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#9b6d2c"/></marker>
+    <style>
+      .h{font:600 18px system-ui,-apple-system,Segoe UI,sans-serif;fill:#17243a}.b{font:14px system-ui,-apple-system,Segoe UI,sans-serif;fill:#45536a}.s{font:12px system-ui,-apple-system,Segoe UI,sans-serif;fill:#65738a}.ey{font:600 11px system-ui,-apple-system,Segoe UI,sans-serif;letter-spacing:1.2px;fill:#52647e}
+    </style>
+  </defs>
+  <rect x="1" y="1" width="1198" height="468" rx="18" fill="#f7f6f2" stroke="#d8d7d0"/>
+  <text x="36" y="42" class="ey">SYSTEM MAP · HACKATHON DEPLOYMENT</text>
+  <text x="36" y="72" class="h">A review travels from the browser through checks, AI, and storage</text>
+
+  <rect x="38" y="132" width="220" height="178" rx="12" fill="#fff" stroke="#b9c4d2" stroke-width="1.5"/>
+  <rect x="38" y="132" width="220" height="9" rx="5" fill="#355c7d"/>
+  <text x="58" y="174" class="ey">1 · INPUT</text>
+  <text x="58" y="204" class="h">Browser</text>
+  <text x="58" y="231" class="b">React + Vite</text>
+  <text x="58" y="258" class="s">Code · diff · files · PR link</text>
+  <text x="58" y="280" class="s">Persona · custom rules</text>
+
+  <rect x="340" y="105" width="510" height="236" rx="14" fill="#edf1f4" stroke="#9eafbf" stroke-width="1.5"/>
+  <text x="362" y="133" class="ey">2 · APPLICATION · VERCEL</text>
+  <rect x="362" y="151" width="218" height="72" rx="9" fill="#fff" stroke="#c3ccd4"/>
+  <text x="380" y="180" class="h">FastAPI</text>
+  <text x="380" y="202" class="s">Review · chat · settings APIs</text>
+  <rect x="600" y="151" width="228" height="72" rx="9" fill="#fff" stroke="#c3ccd4"/>
+  <text x="618" y="180" class="h">Static checks</text>
+  <text x="618" y="202" class="s">Secrets · rules · Python metrics</text>
+  <rect x="362" y="241" width="218" height="72" rx="9" fill="#fff" stroke="#c3ccd4"/>
+  <text x="380" y="270" class="h">AI reviewer</text>
+  <text x="380" y="292" class="s">Persona-shaped findings</text>
+  <rect x="600" y="241" width="228" height="72" rx="9" fill="#fff" stroke="#c3ccd4"/>
+  <text x="618" y="270" class="h">Results</text>
+  <text x="618" y="292" class="s">Findings · tests · chat</text>
+
+  <rect x="930" y="132" width="230" height="82" rx="12" fill="#eef3e9" stroke="#a9b79c" stroke-width="1.5"/>
+  <text x="950" y="162" class="ey">3 · MODEL PROVIDER</text>
+  <text x="950" y="190" class="h">OpenRouter</text>
+  <text x="950" y="205" class="s">Secret key stays server-side</text>
+
+  <rect x="930" y="251" width="230" height="82" rx="12" fill="#f4eee5" stroke="#c9b89b" stroke-width="1.5"/>
+  <text x="950" y="281" class="ey">4 · PERSISTENCE</text>
+  <text x="950" y="309" class="h">Neon Postgres</text>
+  <text x="950" y="324" class="s">Reviews · findings · chats</text>
+
+  <rect x="44" y="373" width="214" height="58" rx="10" fill="#fffaf0" stroke="#d4bd91" stroke-dasharray="5 4"/>
+  <text x="62" y="398" class="ey">OPTIONAL SOURCE</text>
+  <text x="62" y="419" class="b">GitHub pull request webhook</text>
+
+  <path d="M258 220H329" fill="none" stroke="#44536a" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M850 181H918" fill="none" stroke="#44536a" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M850 277H918" fill="none" stroke="#44536a" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M258 402C300 402 300 260 329 260" fill="none" stroke="#9b6d2c" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#dashArrow)"/>
+  <path d="M362 185C314 185 312 120 263 120" fill="none" stroke="#44536a" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="280" y="359" class="s">On Vercel, reviews run inline; no Redis worker is required.</text>
+</svg>

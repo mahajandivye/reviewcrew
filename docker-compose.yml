@@ -1,0 +1,59 @@
+# ReviewPilot - local infrastructure.
+#
+# This file only starts the two *stateful* services (PostgreSQL + Redis).
+# The FastAPI app and the Celery worker run on your machine with `uvicorn` /
+# `celery` so you can hot-reload and debug them easily.
+#
+#   docker compose up -d      -> start Postgres + Redis in the background
+#   docker compose ps         -> check they are healthy
+#   docker compose logs -f    -> watch logs
+#   docker compose down       -> stop (data survives in the named volumes)
+#   docker compose down -v    -> stop AND delete the data (fresh start)
+#
+# Note: modern Docker Compose does not need a `version:` key anymore.
+
+name: reviewpilot
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: reviewpilot-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: reviewpilot
+      POSTGRES_PASSWORD: reviewpilot
+      POSTGRES_DB: reviewpilot
+      # Faster startup and better search on a tiny dev database.
+      POSTGRES_INITDB_ARGS: "--data-checksums"
+    ports:
+      # host:container - this is what your .env DATABASE_URL points at.
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      # "docker compose up --wait" (and depends_on below) wait for this.
+      test: ["CMD-SHELL", "pg_isready -U reviewpilot -d reviewpilot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  redis:
+    image: redis:7-alpine
+    container_name: reviewpilot-redis
+    restart: unless-stopped
+    # AOF persistence so queued review jobs survive a Redis restart.
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:
+  redisdata:
